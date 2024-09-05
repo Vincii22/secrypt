@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secrypt - Securing Your Digital World</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="cryptography.html">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-slider">
+            <img src="assets/images/hero1.jpg" class="active" alt="Slide 1">
+            <img src="assets/images/hero2.jpg" alt="Slide 2">
+            <img src="assets/images/hero3.jpg" alt="Slide 3">
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Secrypt</h1>
+                <p>Securing Your Digital World</p>
+                <p>Your data, our priority. Experience the future of security with Secrypt's state-of-the-art encryption technology and seamless user experience.</p>
+                <a href="#features" class="cta">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="content" id="features">
+        <div class="feature-item">
+            <img src="assets/images/encryption-icon.png" alt="Encryption Icon">
+            <h2>Strong Encryption</h2>
+            <p>Protect your data with industry-leading encryption techniques that ensure your information is secure from unauthorized access.</p>
+        </div>
+        <div class="feature-item">
+            <img src="assets/images/user-friendly-icon.png" alt="User-Friendly Interface Icon">
+            <h2>User-Friendly Interface</h2>
+            <p>Secrypt provides an intuitive interface that allows you to manage your security settings effortlessly, even if you're not a tech expert.</p>
+        </div>
+        <div class="feature-item">
+            <img src="assets/images/lock-icon.png" alt="Secure Data Icon">
+            <h2>Data Integrity</h2>
+            <p>Our platform ensures that your data remains intact and unaltered, providing peace of mind that your information is trustworthy and accurate.</p>
+        </div>
+        <div class="feature-item">
+            <img src="assets/images/privacy-icon.png" alt="Privacy Protection Icon">
+            <h2>Privacy Protection</h2>
+            <p>Your privacy is our priority. We offer advanced privacy features that keep your personal and sensitive information confidential.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div>
+            <h2>About Secrypt</h2>
+            <p>At Secrypt, we are dedicated to providing top-notch security solutions that empower individuals and businesses to safeguard their digital assets. Our mission is to make the digital world a safer place for everyone.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div>
+            <h2>Contact Us</h2>
+            <p>Have questions or need support? Reach out to our team, and we'll be happy to assist you.</p>
+            <p>Email: support@secrypt.com</p>
+            <p>Phone: +1 (800) 123-4567</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Secrypt. All rights reserved.</p>
+        <p><a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+    </footer>
+
+    <!-- Smooth Scrolling JavaScript -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.hero-slider img');
+        const imageCount = images.length;
+
+        setInterval(() => {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % imageCount;
+            images[currentIndex].classList.add('active');
+        }, 3000);
+    </script>
+</body>
+</html>

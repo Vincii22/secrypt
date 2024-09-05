@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secrypt Cipher</title>
+    <link rel="stylesheet" href="assets/cryptography.css">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="cryptography.html">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Secrypt Encryption & Decryption</h1>
+
+        <div class="input-group">
+            <label for="key">Enter your key:</label>
+            <input type="text" id="key" placeholder="Enter key">
+        </div>
+
+        <div class="input-group">
+            <label for="message">Enter your message:</label>
+            <input type="text" id="message" placeholder="Type your message here">
+        </div>
+
+        <div class="button-group">
+            <button onclick="encrypt()">Encrypt</button>
+            <button onclick="decrypt()">Decrypt</button>
+        </div>
+
+        <div class="output-group">
+            <h2>Encrypted Message:</h2>
+            <p id="encrypted-message"></p>
+
+            <h2>Decrypted Message:</h2>
+            <p id="decrypted-message"></p>
+        </div>
+    </div>
+
+    <script>
+        const constellationsBase = [
+            'Andromeda', 'Antlia', 'Apus', 'Aquarius', 'Aquila', 'Ara', 'Aries', 
+            'Auriga', 'Bootes', 'Caelum', 'Camelopardalis', 'Cancer', 'Canes Venatici', 
+            'Canis Major', 'Canis Minor', 'Capricornus', 'Carina', 'Cassiopeia', 
+            'Centaurus', 'Cepheus', 'Cetus', 'Chamaeleon', 'Circinus', 'Columba', 
+            'Coma Berenices', 'Corona Australis', 'Corona Borealis', 'Corvus', 'Crater', 
+            'Crux', 'Cygnus', 'Delphinus', 'Dorado', 'Draco', 'Equuleus', 'Eridanus', 
+            'Fornax', 'Gemini', 'Grus', 'Hercules', 'Horologium', 'Hydra', 'Hydrus', 
+            'Indus', 'Lacerta', 'Leo', 'Leo Minor', 'Lepus', 'Libra', 'Lupus', 'Lynx', 
+            'Lyra', 'Mensa', 'Microscopium', 'Monoceros', 'Musca', 'Norma', 'Octans', 
+            'Ophiuchus', 'Orion', 'Pavo', 'Pegasus', 'Perseus', 'Phoenix', 'Pictor', 
+            'Pisces', 'Piscis Austrinus', 'Puppis', 'Pyxis', 'Reticulum', 'Sagitta', 
+            'Sagittarius', 'Scorpius', 'Sculptor', 'Scutum', 'Serpens', 'Sextans', 
+            'Taurus', 'Telescopium', 'Triangulum', 'Triangulum Australe', 'Tucana', 
+            'Ursa Major', 'Ursa Minor', 'Vela', 'Virgo', 'Volans', 'Vulpecula'
+        ];
+
+        function getCipherArray(key) {
+            // Create a new constellations array based on the key
+            const keyArray = key.toUpperCase().split('').filter(c => /[A-Z]/.test(c));
+            const shift = keyArray.reduce((acc, char) => acc + char.charCodeAt(0) - 65, 0);
+            const shiftIndex = shift % constellationsBase.length;
+            return [...constellationsBase.slice(shiftIndex), ...constellationsBase.slice(0, shiftIndex)];
+        }
+
+        function encrypt() {
+            const key = document.getElementById('key').value;
+            const message = document.getElementById('message').value.toUpperCase();
+            const cipherArray = getCipherArray(key);
+            let encrypted = '';
+
+            for (let char of message) {
+                if (char >= 'A' && char <= 'Z') {
+                    encrypted += cipherArray[char.charCodeAt(0) - 65] + ' ';
+                } else {
+                    encrypted += char;
+                }
+            }
+
+            document.getElementById('encrypted-message').innerText = encrypted.trim();
+        }
+
+        function decrypt() {
+            const key = document.getElementById('key').value;
+            let encryptedMessage = document.getElementById('message').value.trim();
+            const cipherArray = getCipherArray(key);
+            let decrypted = '';
+        
+            // Loop through the cipherArray to replace full constellation names in the encrypted message
+            for (let i = 0; i < cipherArray.length; i++) {
+                const constellation = cipherArray[i];
+                const regex = new RegExp('\\b' + constellation + '\\b', 'g'); // Ensure full constellation name match
+                encryptedMessage = encryptedMessage.replace(regex, String.fromCharCode(i + 65)); // Replace constellation name with corresponding letter
+            }
+        
+            document.getElementById('decrypted-message').innerText = encryptedMessage.toLowerCase(); // Convert to lowercase
+        }
+    </script>
+</body>
+</html>
