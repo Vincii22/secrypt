@@ -4,18 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secrypt - Securing Your Digital World</title>
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/topnav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav>
+    <!-- Main Top Navigation -->
+    <header>
+        <div class="main-topnav">
+            <div class="logo">
+                <a href="index.html"><img src="assets/images/logo.png" alt="Logo"></a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="user-actions">
+                <a href="cart.html" class="cart">
+                    <!-- Cart Icon (Font Awesome) -->
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                <a href="login.html" class="login">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Secondary Top Navigation -->
+    <nav class="secondary-topnav">
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="cryptography.html">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="industries.html">Industries</a></li>
+            <li><a href="solution.html">Solution</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="company.html">Company</a></li>
         </ul>
     </nav>
+
 
     <!-- Hero Section -->
     <section class="hero" id="home">
