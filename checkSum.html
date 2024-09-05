@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checksum Calculator</title>
+    <link rel="stylesheet" href="assets/css/checkSum.css">
+    <link rel="stylesheet" href="assets/css/topnav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Main Top Navigation -->
+    <header>
+        <div class="main-topnav">
+            <div class="logo">
+                <a href="index.html"><img src="assets/images/logo.png" alt="Logo"></a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="user-actions">
+                <a href="cart.html" class="cart">
+                    <!-- Cart Icon (Font Awesome) -->
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                <a href="login.html" class="login">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Secondary Top Navigation -->
+    <nav class="secondary-topnav">
+        <ul>
+            <li><a href="industries.html">Industries</a></li>
+            <li><a href="solution.html">Solution</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="company.html">Company</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Checksum Calculator</h1>
+
+        <div class="input-group">
+            <label for="data">Enter your data:</label>
+            <textarea id="data" placeholder="Type your data here"></textarea>
+        </div>
+
+        <div class="button-group">
+            <button onclick="calculateChecksum()">Calculate Checksum</button>
+        </div>
+
+        <div class="output-group">
+            <h2>Checksum:</h2>
+            <p id="checksum-result"></p>
+        </div>
+    </div>
+
+    <script>
+        function calculateChecksum() {
+            const data = document.getElementById('data').value;
+            let checksum = 0;
+
+            for (let i = 0; i < data.length; i++) {
+                checksum = (checksum + data.charCodeAt(i)) % 256;
+            }
+
+            document.getElementById('checksum-result').innerText = checksum.toString(16).toUpperCase();
+        }
+    </script>
+
+</body>
+</html>

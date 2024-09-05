@@ -1,0 +1,120 @@
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #1A1A1A;
+    color: #E0E0E0;
+}
+
+
+.hero {
+    position: relative;
+    height: 60vh; /* Adjust height as needed */
+    background: url('/assets/images/solution.jpg') no-repeat center center;
+    background-size: cover; /* Ensures the image covers the section */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #E0E0E0; /* Text color */
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Adjust opacity and color as needed */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; /* Ensures content is above the overlay */
+    text-align: center;
+    color: #E0E0E0; /* Text color */
+}
+
+.hero-content h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    margin: 0;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+}
+
+.solutions {
+    padding: 3rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #2D2D2D;
+}
+
+.solution-item {
+    background-color: #333333;
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 1rem;
+    max-width: 350px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.solution-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+}
+
+.solution-icon {
+    font-size: 2rem;
+    color: #00AEEF;
+    margin-bottom: 1rem;
+}
+
+.solution-item h2 {
+    font-size: 1.5rem;
+    color: #00AEEF;
+}
+
+.solution-item p {
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.solution-item .btn {
+    background-color: #00AEEF;
+    color: #1A1A1A;
+    padding: 0.75rem 1.5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.solution-item .btn:hover {
+    background-color: #0098D3;
+}
+
+footer {
+    background-color: #141414;
+    color: #B0B0B0;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.5);
+}
+
+footer a {
+    color: #B0B0B0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #00AEEF;
+}

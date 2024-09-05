@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Formatter</title>
+    <link rel="stylesheet" href="assets/css/json-formatter.css">
+    <link rel="stylesheet" href="assets/css/topnav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Main Top Navigation -->
+    <header>
+        <div class="main-topnav">
+            <div class="logo">
+                <a href="index.html"><img src="assets/images/logo.png" alt="Logo"></a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="user-actions">
+                <a href="cart.html" class="cart">
+                    <!-- Cart Icon (Font Awesome) -->
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                <a href="login.html" class="login">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Secondary Top Navigation -->
+    <nav class="secondary-topnav">
+        <ul>
+            <li><a href="industries.html">Industries</a></li>
+            <li><a href="solution.html">Solution</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="company.html">Company</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>JSON Formatter</h1>
+
+        <div class="input-group">
+            <label for="json-input">Enter your JSON:</label>
+            <textarea id="json-input" placeholder="Paste JSON here..."></textarea>
+        </div>
+
+        <div class="button-group">
+            <button onclick="formatJSON()">Format JSON</button>
+        </div>
+
+        <div class="output-group">
+            <h2>Formatted JSON:</h2>
+            <pre id="formatted-json"></pre>
+        </div>
+    </div>
+
+    <script>
+        function formatJSON() {
+            const jsonInput = document.getElementById('json-input').value;
+            try {
+                const parsed = JSON.parse(jsonInput);
+                const formatted = JSON.stringify(parsed, null, 2);
+                document.getElementById('formatted-json').textContent = formatted;
+            } catch (error) {
+                document.getElementById('formatted-json').textContent = 'Invalid JSON format';
+            }
+        }
+    </script>
+
+</body>
+</html>
