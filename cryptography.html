@@ -69,63 +69,104 @@
     </div>
 
     <script>
-        const constellationsBase = [
-            'Andromeda', 'Antlia', 'Apus', 'Aquarius', 'Aquila', 'Ara', 'Aries', 
-            'Auriga', 'Bootes', 'Caelum', 'Camelopardalis', 'Cancer', 'Canes Venatici', 
-            'Canis Major', 'Canis Minor', 'Capricornus', 'Carina', 'Cassiopeia', 
-            'Centaurus', 'Cepheus', 'Cetus', 'Chamaeleon', 'Circinus', 'Columba', 
-            'Coma Berenices', 'Corona Australis', 'Corona Borealis', 'Corvus', 'Crater', 
-            'Crux', 'Cygnus', 'Delphinus', 'Dorado', 'Draco', 'Equuleus', 'Eridanus', 
-            'Fornax', 'Gemini', 'Grus', 'Hercules', 'Horologium', 'Hydra', 'Hydrus', 
-            'Indus', 'Lacerta', 'Leo', 'Leo Minor', 'Lepus', 'Libra', 'Lupus', 'Lynx', 
-            'Lyra', 'Mensa', 'Microscopium', 'Monoceros', 'Musca', 'Norma', 'Octans', 
-            'Ophiuchus', 'Orion', 'Pavo', 'Pegasus', 'Perseus', 'Phoenix', 'Pictor', 
-            'Pisces', 'Piscis Austrinus', 'Puppis', 'Pyxis', 'Reticulum', 'Sagitta', 
-            'Sagittarius', 'Scorpius', 'Sculptor', 'Scutum', 'Serpens', 'Sextans', 
-            'Taurus', 'Telescopium', 'Triangulum', 'Triangulum Australe', 'Tucana', 
-            'Ursa Major', 'Ursa Minor', 'Vela', 'Virgo', 'Volans', 'Vulpecula'
-        ];
+        const upperCaseConstellations = [
+        'Andromeda', 'Antlia', 'Apus', 'Aquarius', 'Aquila', 'Ara', 'Aries', 
+        'Auriga', 'Bootes', 'Caelum', 'Camelopardalis', 'Cancer', 'Canes Venatici', 
+        'Canis Major', 'Canis Minor', 'Capricornus', 'Carina', 'Cassiopeia', 
+        'Centaurus', 'Cepheus', 'Cetus', 'Chamaeleon', 'Circinus', 'Columba', 
+        'Coma Berenices', 'Corona Australis'
+    ];
+    
+    const lowerCaseConstellations = [
+        'Corona Borealis', 'Corvus', 'Crater', 'Crux', 'Cygnus', 'Delphinus', 'Dorado', 
+        'Draco', 'Equuleus', 'Eridanus', 'Fornax', 'Gemini', 'Grus', 'Hercules', 
+        'Horologium', 'Hydra', 'Hydrus', 'Indus', 'Lacerta', 'Leo', 'Leo Minor', 
+        'Lepus', 'Libra', 'Lupus', 'Lynx', 'Lyra'
+    ];
+    
+    const numberConstellations = [
+        'Mensa', 'Microscopium', 'Monoceros', 'Musca', 'Norma', 'Octans', 
+        'Ophiuchus', 'Orion', 'Pavo', 'Pegasus'
+    ];
+    
+    const specialCharConstellations = [
+        'Perseus', 'Phoenix', 'Pictor', 'Pisces', 'Piscis Austrinus', 'Puppis', 
+        'Pyxis', 'Reticulum', 'Sagitta', 'Sagittarius'
+    ];
 
-        function getCipherArray(key) {
-            // Create a new constellations array based on the key
-            const keyArray = key.toUpperCase().split('').filter(c => /[A-Z]/.test(c));
-            const shift = keyArray.reduce((acc, char) => acc + char.charCodeAt(0) - 65, 0);
-            const shiftIndex = shift % constellationsBase.length;
-            return [...constellationsBase.slice(shiftIndex), ...constellationsBase.slice(0, shiftIndex)];
-        }
+    function getCipherArray(key, baseArray) {
+        const keyArray = key.toUpperCase().split('').filter(c => /[A-Z]/.test(c));
+        const shift = keyArray.reduce((acc, char) => acc + char.charCodeAt(0) - 65, 0);
+        const shiftIndex = shift % baseArray.length;
+        return [...baseArray.slice(shiftIndex), ...baseArray.slice(0, shiftIndex)];
+    }
 
         function encrypt() {
             const key = document.getElementById('key').value;
-            const message = document.getElementById('message').value.toUpperCase();
-            const cipherArray = getCipherArray(key);
+            const message = document.getElementById('message').value;
+            const cipherArrayUpper = getCipherArray(key, upperCaseConstellations);
+            const cipherArrayLower = getCipherArray(key, lowerCaseConstellations);
+            const cipherArrayNumbers = getCipherArray(key, numberConstellations);
+            const cipherArraySpecial = getCipherArray(key, specialCharConstellations);
             let encrypted = '';
-
+        
             for (let char of message) {
                 if (char >= 'A' && char <= 'Z') {
-                    encrypted += cipherArray[char.charCodeAt(0) - 65] + ' ';
+                    encrypted += cipherArrayUpper[char.charCodeAt(0) - 65] + ' ';
+                } else if (char >= 'a' && char <= 'z') {
+                    encrypted += cipherArrayLower[char.charCodeAt(0) - 97] + ' ';
+                } else if (char >= '0' && char <= '9') {
+                    encrypted += cipherArrayNumbers[char.charCodeAt(0) - 48] + ' ';
+                } else if (/[!@#$%^&*()]/.test(char)) {
+                    encrypted += cipherArraySpecial['!@#$%^&*()'.indexOf(char)] + ' ';
                 } else {
                     encrypted += char;
                 }
             }
-
+        
             document.getElementById('encrypted-message').innerText = encrypted.trim();
         }
 
         function decrypt() {
             const key = document.getElementById('key').value;
             let encryptedMessage = document.getElementById('message').value.trim();
-            const cipherArray = getCipherArray(key);
+            const cipherArrayUpper = getCipherArray(key, upperCaseConstellations);
+            const cipherArrayLower = getCipherArray(key, lowerCaseConstellations);
+            const cipherArrayNumbers = getCipherArray(key, numberConstellations);
+            const cipherArraySpecial = getCipherArray(key, specialCharConstellations);
             let decrypted = '';
         
-            // Loop through the cipherArray to replace full constellation names in the encrypted message
-            for (let i = 0; i < cipherArray.length; i++) {
-                const constellation = cipherArray[i];
-                const regex = new RegExp('\\b' + constellation + '\\b', 'g'); // Ensure full constellation name match
-                encryptedMessage = encryptedMessage.replace(regex, String.fromCharCode(i + 65)); // Replace constellation name with corresponding letter
+            // Uppercase letters decryption
+            for (let i = 0; i < cipherArrayUpper.length; i++) {
+                const constellation = cipherArrayUpper[i];
+                const regex = new RegExp('\\b' + constellation + '\\b', 'g');
+                encryptedMessage = encryptedMessage.replace(regex, String.fromCharCode(i + 65));
             }
         
-            document.getElementById('decrypted-message').innerText = encryptedMessage.toLowerCase(); // Convert to lowercase
+            // Lowercase letters decryption
+            for (let i = 0; i < cipherArrayLower.length; i++) {
+                const constellation = cipherArrayLower[i];
+                const regex = new RegExp('\\b' + constellation + '\\b', 'g');
+                encryptedMessage = encryptedMessage.replace(regex, String.fromCharCode(i + 97));
+            }
+        
+            // Numbers decryption
+            for (let i = 0; i < cipherArrayNumbers.length; i++) {
+                const constellation = cipherArrayNumbers[i];
+                const regex = new RegExp('\\b' + constellation + '\\b', 'g');
+                encryptedMessage = encryptedMessage.replace(regex, String.fromCharCode(i + 48));
+            }
+        
+            // Special characters decryption
+            for (let i = 0; i < cipherArraySpecial.length; i++) {
+                const constellation = cipherArraySpecial[i];
+                const regex = new RegExp('\\b' + constellation + '\\b', 'g');
+                encryptedMessage = encryptedMessage.replace(regex, '!@#$%^&*()'[i]);
+            }
+        
+            document.getElementById('decrypted-message').innerText = encryptedMessage;
         }
+        
     </script>
 
     <!-- https://starchild.gsfc.nasa.gov/docs/StarChild/questions/88constellations.html -->
